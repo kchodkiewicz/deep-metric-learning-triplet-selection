@@ -1,0 +1,104 @@
+\section{Wykład 4 - Sieci Kohonena uczenie bez nauczyciela $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$}
+
+\paragraph{Reguła Hebba}
+
+\begin{equation}
+ W' = W + n y X
+\end{equation}
+
+Analogiczna do Widrow-Hoffa, ale zamiast błędu mamy po prostu sygnał wyjściowy.
+
+Wady Hebba:
+
+\begin{enumerate}
+ \item niska efektywność uczenia
+ \item przemnożony wpływ początkowych wart. wag
+ \item możliwość pomijania niektórych klas nauczonej sieci
+ \item powstawanie reduntantnych nadinterpretacji klas
+\end{enumerate}
+
+Uczenia polega na tym, że wektory id do sygnału wejściowego uczącego.
+Zasada owczego pędu - idą wszystkie. Może być za duży albo za mały współczynnik uczenia.
+Czas nauki jest istotny. Bardzo duża liczba neuronów może nie pomagać. Sieć może zapomnieć 
+klasy (wektory zostały \textit{ukradzione})
+
+\paragraph{Warianty metod samouczenia}
+
+Metoda przyrostowego samouczenia (differential hebbian learning)
+
+\begin{equation}
+ w_{ki}^{j+1} = w_{ki}^j + \mu (x_i^j - x_i^(j-1))(y_k^j - y_k^(j-1))
+\end{equation}
+
+Metoda \textit{Gwiazdy wejść} (Instar learning) - najczęściej wybierana w analizie skupień
+
+\begin{equation}
+ w_{ki}^{j+1} = w_{ki}^j + \mu^j (x_i^j - w_{ki}^j)
+\end{equation}
+\begin{equation}
+ \mu^j = 0.1 - \lambda
+\end{equation}
+
+Miarą podobieństwa wektora wejściowego i wektora wag jest cosinus kąta unormowanych wektorów.
+
+Metoda \textit{Gwiazd wyjść} (Outstar learning)
+
+\begin{equation}
+ w_{ki}^{j+1} = w_{ki}^j + \mu^j (y_k^j - w_{ki}^j)
+\end{equation}
+
+\paragraph{Samouczenie sieci metodą Kohonena}
+
+Po pojawieniu się sygnału wejściowego wszystkie sygnały wyjściowe są porównywane i wybierany jest
+\textbf{zwycięzca} o numerze $k$, którego sygnał $y_k^j$ ma \textbf{największą} wartość. Wówczas
+zmieniamy współczynnik w następujący sposób:
+
+\begin{equation}
+ w_{ki}^{j+1} = w_{ki}^j + \mu (x_i^j - w_{ki}^j)
+\end{equation}
+
+Można zdefiniować pojęcie sąsiedztwa:
+
+\begin{equation}
+ w_{mi}^{j+1} = w_{mi}^j + \mu h(m,k) (x_i^j - w_{mi}^j)
+\end{equation}
+
+funkcja $h(m,k)$ jest malejącą funkcją odległości między neuronem $m$, a zwycięzcą $k$.
+
+Zasady rywalizacji:
+\begin{enumerate}
+ \item ZWYCIĘZCA BIERZE WSZYSTKO ( WINNER TAKES ALL)
+ \item ZWYCIĘZCA BIERZE WIĘKSZOŚĆ ( WINNER TAKES MOST)
+\end{enumerate}
+
+Mapa topologiczna w korze mózgowej w obszarze czucia somatycznego oraz sterowania jest o podobnej 
+strukturze, co sieci Kohonena.
+Istnieje zjawisko skręcenia się sieci Kohonena np. w postać krzyża.
+SOM może być wykorzystywana do przedstawiania skomplikowanych korelacji w danych statystycznych.
+Sieć Kohonena może służyć do rzutowania wielowymiarowego zbioru danych do przestrzeni o małej wymiarowości.
+
+\paragraph{Mechanizm sumienia}
+
+Istnieje możliwość wprowadzenia sumienia, wtedy niwelujemy możliwość dłuższego braku nauki jakiegoś neuronu.
+
+\paragraph{Podsumowanie}
+
+\begin{enumerate}
+ \item sieć uczy się bez nauczyciela
+ \item ma dwie warstwy o wyraźnie rozdzielonych funkcjach (wejściowa i topologiczna)
+ \item uporządkowane neurony wyjściowe
+ \item ważną rolę odgrywa sąsiedztwo
+ \item w wyniku uczenia powstaje mapa topologiczna
+ \item apriorytyczna interpretacja wartości wyjściowych jest niemożliwa
+ \item po uczeniu można ustalić jakie znaczenie mają poszczególne rejony mapy topologicznej - ale 
+ tylko na podstawie analizy konkretnych danych wejściowych
+\end{enumerate}
+
+\paragraph{Zastosowania}
+
+\begin{enumerate}
+ \item rozpoznawanie obrazów
+ \item klasyfikacja
+ \item zgłębianie danych
+ \item tworzenie modeli - modelu świata zewnętrznego w mózgu robota, modelu uczciwego przedsiębiorcy albo działania procesu
+\end{enumerate}

@@ -1,0 +1,198 @@
+\section{Algorytm wstecznej propagacji błędów $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ }
+
+\paragraph{Liniowa funkcja PSP} wyznacza ważoną sumę wszystkich wartości
+wejściowych. Ta suma następnie zostaje zmodyfikowana w taki sposób, że
+odejmuje się od niej wartość progową. W terminologii wektorowej można
+powiedzieć, że rozważana funkcja PSP jest to iloczyn skalarny wektora
+wag i wektora wejściowego - minus wartość progu. Neurony z liniową
+funkcją PSP generują liniowe funkcje dyskryminacyjne. Oznacza to, że
+identyczne wartości sygnału wyjściowego otrzymuje się dla sygnałów
+wejściowych znajdujących się po tej samej stronie hiperpłaszczyzny w
+przestrzeni wzorców. Położenie tej hiperpłaszczyzny w przestrzeni
+sygnałów wejściowych determinowane jest przez parametry neuronu
+(współczynniki wagowe i próg). Obserwując zachowanie neuronów z
+liniową funkcją PSP można stwierdzić, że próbują one rozwiązać stawiane
+im zadania poprzez odpowiednie manipulowanie wspomnianą
+hiperpłaszczyzną. Na przykład często podejmowane zadanie
+rozpoznawania wejściowych sygnałów neurony te usiłują zrealizować
+optymalizując klasyfikację wejściowych sygnałów poprzez stosowane
+podzielenie na części całej przestrzeni sygnałów wejściowych (na
+podstawie odpowiednich wzorców) za pomocą systemu przecinających się
+hiperpłaszczyzn. 
+
+\begin{equation}
+ y = f(\sum(x_i w_i))
+\end{equation}
+
+
+\paragraph{Radialna} Neurony wyposażone w radialną funkcję PSP wyznaczają
+kwadrat odległości pomiędzy dwoma punktami w N wymiarowej przestrzeni
+(gdzie N jest liczbą wejść). Punkty pomiędzy którymi wyznacza się
+odległość reprezentują odpowiednio wektor opisujący sygnał wejściowy
+oraz wektor wag neuronu. Neurony posiadające radialną funkcję PSP
+wytwarzają identyczne wartości wyjściowe dla wszystkich sygnałów
+wejściowych leżących na hipersferach wyznaczonych w przestrzeni tych
+sygnałów wejściowych. Środki tych hipersfer ulokowane są w punktach
+odpowiadających wektorom wag neuronów. Wektory te pełnią rolę wzorców
+sygnałów, na które dana sieć powinna szczególnie reagować. Neurony
+radialne próbują więc zrealizować klasyfikację wejściowych sygnałów
+poprzez pomiar odległości reprezentowanych przez nie punktów od
+wyznaczonych wzorców, które przechowywane są w postaci wektorów wag
+neuronów. Kwadrat odległości wyznaczany przez neurony radialne mnożony
+jest przez wartość progową (która w neuronach radialnych pełni rolę miary
+wartości dopuszczalnego odchylenia); w ten sposób wyznaczana jest wartość
+wejściowa rozważanego neuronu.
+(różnica wektorowa)
+\begin{equation}
+ y = f( || x - w || )
+\end{equation}
+
+
+\paragraph{Ilorazowa}
+
+Ten typ funkcji PSP został specjalnie
+zaprojektowany dla sieci regresyjnych i nie
+powinien być stosowany w innych przypadkach. W
+neuronach stosujących ten typ funkcji PSP oczekuje
+się, że waga skojarzona z jednym wejściem będzie
+równa $+1$, waga skojarzona z innym wejściem
+będzie równa $-1$, zaś wszystkie pozostałe wagi
+przyjmują wartość zero. Wartością generowaną
+przez tę funkcję jest wartość powstająca w ten
+sposób, że wartość sygnału na wejściu
+odpowiadającym wadze $+1$ podzielona jest przez
+wartość sygnału na wejściu o wadze $-1$.
+
+\paragraph{Funkcje nieliniowe}
+
+Przykłady: liniowa, threshold, sigmoid, limited linear, funkcja skokowa (binary step function)
+- dla $x$ mniejszych od $\theta$ jest np. $0$ a, dla większych $1$ ($\theta$ - próg).
+
+\paragraph{Funkcja sigmoida unipolarna}
+
+\begin{equation}
+ f(x)  = \frac{1}{1 + \exp{- \tau x}}
+\end{equation}
+
+\paragraph{Sigmoida bipolarna}
+
+\begin{equation}
+ g(x) = 2 f(x) - 1 = \frac{ 1 - \exp{- \tau x} }{1 + \exp{- \tau x}}
+\end{equation}
+
+\paragraph{Tangens hiperboliczny}
+
+\begin{equation}
+ h(x) = \frac{ \exp{x} - \exp{-x} }{ \exp{x} + \exp{-x}}
+\end{equation}
+
+\paragraph{Funkcja Gaussa}
+
+\begin{equation}
+ f(x) = \exp{-x^2}
+\end{equation}
+
+\begin{enumerate}
+ \item liniowa
+ \item logistyczna $\frac{1}{1 + \exp{-x}}$
+ \item wykładnicza
+ \item softmax $\frac{e^x}{ \sum_i e^{x_i}}$
+ \item pierwiastek
+ \item sinus
+ \item liniowa z nasyceniem
+ \item progowa
+\end{enumerate}
+
+\paragraph{Uczenie sieci nieliniowych jednowarstwowych}
+
+Cel - uzyskanie jak największej zgodności pomiędzy odpowiedzią neuronu, a wymaganą wartością na wyjściu
+Metoda - minimalizacja funkcji kryterialnej
+
+W efekcie otrzymujemy - regułę Delta.
+
+\begin{equation}
+ W' = W + \mu \delta x^T
+\end{equation}
+dla sieci jednowarstwowych.
+
+\paragraph{Błąd na wejściu nieliniowego neuronu}
+\begin{equation}
+ \delta_k = (z_k - y_k) f'(e_k)
+\end{equation}
+
+\paragraph{Błąd na wyjściu}
+\begin{equation}
+ d_{wyj} = y_k - z_k
+\end{equation}
+
+\paragraph{Reguła delta dla sieci nieliniowych}
+
+\begin{equation}
+ w_{ik}^{j+1} = w_{ik}^j + \mu f'(e_k^j) (x_k^j - y_k^j) x_i^j
+\end{equation}
+
+\begin{equation}
+ y_k^j = f(e_k^j) = f(\sum_{l=0}^L w_{lk}^j x_l^j
+\end{equation}
+
+\paragraph{Backpropagation}
+
+Algorytm uczenia sieci nieliniowych backpropagation 
+czyli metoda wstecznej propagacji błędów polega na 
+odtwarzaniu przypuszczalnej wartości błędów głębszych 
+warstw sieci (do których nie ma bezpośredniego dostępu) 
+na podstawie rzutowania wstecz błędów wykrytych na 
+wyjściu. Rozważając pojedynczy neuron warstwy ukrytej 
+bierze się pod uwagę błędy wszystkich tych neuronów, 
+do których wysłał swój sygnał wyjściowy, sumuje się je 
+uwzględniając wagi
+
+Istnieje reguła delta dla sieci nielinowych wielowarstwowywch
+
+\paragraph{Korekta Wag}
+
+\textbf{sposób przyrostowy} - aktualizacja wag następuje bespośrednio po
+podaniu każdej pary uczącej. Funkcja błędu zmienia się w każdym
+kolejnym kroku. Jeżeli pary uczące podawane są w losowej kolejności
+to scieżka w przestrzeni wag jest stochastyczna, co pozwala lepiej
+wykorzystać powierzchnię błędu.
+
+\textbf{sposób grupowy} – obliczany jest gradient błędu łącznego. Korekta wag
+następuje po podaniu całego zestawu uczącego. Ten sam efekt można
+uzyskać obliczając poprawki wag dla każdej pary uczącej, ale bez
+dokonywania jej aktualizacji. Zmiana wagi następuje po prezentacji
+wszytkich par uczących poprzez dodanie wszytkich poprawek.
+
+\paragraph{Błąd w metodzie backpropagation}
+
+Błąd średniokwadratowy z wyjścia i zadanego wyjścia oraz suma kwadratów błędów w epoce
+
+\begin{equation}
+ \text{tss} = \sum_{k=1}^K \sum_{i=1}^N {(z_i - y_i)}^2
+\end{equation}
+
+\paragraph{Metoda momentum}
+
+\begin{equation}
+ w_{ik}^{mj} = w_{ik}^{mj} + \mu_1 \delta_k^{mj} x_i^{mj} + \mu_2 \Delta w_{ik}^{m(j-1)}
+\end{equation}
+
+Współczynnik $\mu$ (momentum) jest miarą bezwładności procesu uczenia, chroniąca algorytm
+przed niestabilnym działaniem w warunkach sielnie niemonotonicznej charakterystyki hiperpowierzchni błędu.
+W związku z tym wzrost wartości tego współczynnika prowadzi do wygładzania lokalnych oscylazji zmian współczynników
+wagowych i zwiększa prawdopodobieństwo osiągnięcia globalnego minimum funkcji błędu mimo obecności
+pasożytniczych atraktorów w formie drobnych, ale głębokich minimów lokalnych tej funkcji.
+
+\paragraph{Zależność współczynnika uczenia od kształtu powierzchni funkcji błędu}
+
+Dla płaskowyżu duża wartość powoduje większe poprawki wag, które powodują szybsze przesuwanie się
+w stronę minimum, zaś mała niewielkie zmiany w poszczególnych krokach i wolny przebieg procesu minimalizacji.
+Dla wąwozu mała wartość spowoduje, że trajektoria będzie spadać dokładnie po linii najmniejszego spadku, 
+duża może powodować oscylacje między dwiema ścianami wąwozu.
+
+\paragraph{Zależność współczynnika momentum od kształtu powierzchni funkcji błędu}
+
+Dla płaskowyżu stosunkowo duża wartość nadaje procesowi minimalizację dodatkowego pędu i zwiększenie
+efektywnego tempa uczenia, mała zaś ma jedynie znikomy wpływ na poprawę efektywnego tempa uczenia.
+Dla wąwozu niewielka powoduje tłumienie oscylacji (rola filtru LP dla zmian składowych gradientu), zbyt duża
+powoduje odejście trajektorii zbyt daleko od linii najszybszego spadku - możliwy wzrostu funkcji błędu w kolejnych krokach.

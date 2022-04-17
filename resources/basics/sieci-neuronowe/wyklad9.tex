@@ -1,0 +1,99 @@
+\section{Wykład 9 - sieci rekurencyjne}
+
+\paragraph{Sprzężenie zwrotne w neuronie liniowym}
+
+Po jednorazowym impulsie na wejściu na wyjściu otrzymamy długotrwały proces, w którym sygnał wyjściowy zmienia
+się wielokrotnie, aż osiągnie stan równowagi (jeśli go osiągnie).
+Równowaga w sieci może być osiągnięta (bez
+działającego sygnału wejściowego) jedynie w taki
+sposób, że sygnał wyjściowy po przemnożeniu przez
+wagę sprzężenia zwrotnego daje taki sam sygnał. Taki
+sygnał nazywamy ATRAKTOREM. Położenie
+atraktora jest związane z parametrami sieci. Dla
+współczynnika wagowego sprzężenia zwrotnego o
+wadze 1 każdy punkt jest atraktorem, natomiast dla
+dowolnej sieci stan równowagi uzyskujemy tylko
+wtedy, gdy sygnał wyjściowy ma wartość 0.
+
+Jeśli wartość współczynnika wagi synaptycznej w obwodzie sprzężenia zwrotnego jest dodatnia
+to przebiegi mają charakter aperiodyczny (nie mają oscylacji). Wartości nie zmieniają znaku oraz 
+są monotoniczne (rosną dla dodatnich, maleją dla ujemnych).
+
+Jeśli wartości współczynnika wagi synaptycznej są ujemne to system ma charakter periodyczny.
+
+Istnieje pojęcie niestabilności sieci. Jeśli sieci są stabilne to dążą do stanu równowagi.
+
+Wartość sygnału wejściowego może być podawana cały czas.
+
+\paragraph{Wnioski}
+
+Przebieg sygnałów wyjściowych w sieci ze sprzężeniem zwrotnym może wykazywać dwojakiego rodzaju
+zmienność. W przypadku nieliniowego neuronu możliwe byłyby formy zachowania systemu char. dla
+systemów nielinowych to jest chaotyczne błądzenie \textit{ze wszystkimi cudeńkami współczestnej
+teorii chaosu - efekt motyka, dziwne atraktory, fraktale, zbiory Mandelbrotta}.
+
+\paragraph{Trzy warunki stabilności sieci Hopfielda}
+
+\begin{enumerate}
+ \item wprowadzono bardzo regularną strukturę wewnętrzną sieci - neurony są łączone każdy z każdym
+ 
+ \item zabroniono sprzężeń zwrotnych obejmujących jeden neuron
+ 
+ \item wprowadzone współczynniki wagowe muszą być symetryczne - jak $x$ do $y$ ma wagę $w$ to $y$ do $x$ ma wagę $w$
+ 
+\end{enumerate}
+
+Istnieje pojęcie funkcji energetycznej dla sieci Hopfielda. Wynika z niej, że zmiana y ma znak identyczny
+ze znakiem łącznego pobudzenia. Zmiana energii podczas aktualizacji wyjść jest zawsze niedodatnia.
+
+\paragraph{METODY WYKORZYSTUJĄCE JEDNOKROTNĄ PREZENTACJĘ WZORCÓW}
+
+Metoda Hebba
+
+\begin{equation}
+ t_{ij}^s = \begin{cases}
+    0,& \text{if} i = j \\
+    \frac{1}{N} \sum_{s=1}^M x_i^s x_j^s & \text{otherwise} 
+\end{cases}
+\end{equation}
+
+\begin{enumerate}
+ \item $N$ - liczba bitów w obrazie wzorcowym
+ \item $M$ - liczba wektorów wzorcowych
+ \item $t_{ji}^s$ waga połączenia wyjścia j-tego neuronu z wejściem i-tego neuronu przy prezentacji s-tego obrazu wzorcowego
+\end{enumerate}
+
+Istnieję wersje metody hebba dla macierzy, wzorców unipolarnych oraz wersja iteracyjna.
+
+Metoda wzajemnych ograniczeń - reguła Hebba ze składnikiem $\lambda$ \textit{odpychającym}
+
+\begin{equation}
+ t_{ij}^s = \begin{cases}
+    0,& \text{if} i \ne j \\
+    \sum_{s=1}^M x_i^s x_j^s - \lambda \sum_{p \ne s}^M x_i^p x_j^s & \text{otherwise} 
+\end{cases}
+\end{equation}
+
+Istnieje również reguła rzutowania $\Delta$ oraz zmodyfikowana reguła perceptronu.
+Zmodyfikowana reguła perceptronu różni się od hebba, że w procesie uczenia dodano składnik
+bieżącej korekty błędów.
+
+\paragraph{SIEĆ HOPFIELDA JAKO PAMIĘĆ SKOJARZENIOWA}
+
+Tego typu sieci mogą 
+działać jako pamięć 
+autoasocjacyjna, czyli 
+rozpoznają wzorce, 
+którymi były uczone.
+Wykorzystanie takiej pamięci
+polega na tym, że potrafi ona
+odtworzyć obraz na podstawie
+obrazu silnie zniekształconego
+lub zakłóconego.
+
+\paragraph{Ciekawostka}
+
+Rozwiązywanie problemu TSP przy wykorzystaniu
+sieci Hopfielda jest mało efektywne. Nie istnieją
+reguły dopasowania parametrów sieci a ich dobór
+jest czasochłonny.

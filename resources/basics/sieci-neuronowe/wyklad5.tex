@@ -1,0 +1,181 @@
+\section{Wykład 5 - sieci CP i LVQ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$}
+
+\paragraph{Uczenie z forsowaniem}
+
+\begin{equation}
+ w_{ki}^(j+1) = w_{ik}^j + \mu z_k^j x_i^j
+\end{equation}
+
+Maksymalna liczba możliwych do zapamiętania wzorów w sieci o k neuronach
+\begin{equation}
+ N_{max} = \frac{k}{2 log{k}}
+\end{equation}
+
+Efekty uczenia (przy założeniu, że wszystkie wektory wejściowe są ortonormalne) sieć:
+\begin{enumerate}
+ \item uczy się wiernie odtwarzać wymagane reakcje na wszystkie rozważane sygnały wejściowe
+ \item potrafi uśredniać wejściowe sygnały i odtwarzać idealny wzorzec serii przypadkowo zniekształconych
+ obserwacji
+\end{enumerate}
+
+\paragraph{Architektura sieci LVQ}
+
+Sieć składa się z warstwy wyjściowej, warstwy kohonena oraz warstwy wejściowej. 
+
+Sieć LVQ służy do klasyfikacji sygnałów wejściowych i jest przykładem uczenia z forsowaniem. 
+Warstwa wyjściowa przypisuje wektory wyjściowej do jednej z kilku klas. Główną częścią sieci jest
+warstwa kohonena dokonująca klasyfikacji. LVQ daje \textbf{jednakową liczbę neuronów} przypisanych do danej klasyfikacji
+
+Podklasy w danej grupie nie muszą być podobne.
+
+Podczas uczenia obliczana jest odległość wektora wejściowego od wszystkich neuronów warstwy i wyłaniany 
+jest najbliższy zwycięzca. Jeśli wygrywający wektor należy do klasy sygnału, który pojawił się na wejściu
+to jego wagi są modyfikowane tak, aby zbliżyć się do prezentowanego sygnału. Jeśli nie należy to wektor 
+ten jest odsywany co jest określane jako \textit{odpychanie}. Podczas procesu uczenia neuron 
+przypisany do danej klasy wędruje do obszaru związanego z tą kategorią.
+W trybie testowania (klasyfikacji) obliczana jest odległość prezentowanego neuronu wejściowego 
+do każdego neuronu i leżący najbliżej zostaje zwycięzca. Przynależność do klasy tego sygnału wskazuje
+ten zwycięski neuron.
+
+\begin{equation}
+ d_i = || w_i - x || = \sqrt{ \sum_{j=1}^N (w_{ij} - x_j)^2 }
+\end{equation}
+
+\paragraph{Modyfikacja wag zwycięskiego neuronu}
+
+\begin{equation}
+ W' = \begin{cases}
+    w + \alpha (x-w),& \text{if neuron należy do właściwej klasy} \\
+    w - \gamma (x-w) & \text{otherwise} 
+\end{cases}
+\end{equation}
+
+
+
+\paragraph{Wariant LVQ \#1}
+
+Istnieje możliwość wprowadzenia pojęcia \textit{sumienia}. Jeśli neuron wygrywa zbyt często oddaje
+je innemu neuronowi. Realizowane jest to poprzez bias:
+\begin{equation}
+ d_i' = d_i + b_i
+\end{equation}
+
+\begin{equation}
+ d_i = ||w_i - x|| = {\left(\sum_{j=1}^N (w_{ij} - x_j)^2 \right)}^2
+\end{equation}
+
+\begin{equation}
+ b_i = \mu d_{i_{max}} (1 - N p_i)
+\end{equation}
+
+\begin{enumerate}
+ \item $d_{i_{max}}$ największa odległość wyestymowana wewnętrznie (?)
+ \item $\mu$ - stała, która zwalnia proces uczenia
+ \item $p_i$ oblicza częstotliwość wygrywania, na początku $\frac{1}{N}$
+ \item liczba neuronów kohonena na klasę
+ \item $\phi$ stała do aktualizacji częstotliwości wygrywania
+\end{enumerate}
+
+\begin{equation}
+ W' = \begin{cases}
+    (1-\phi) p_i,& \text{if i nie jest zwycięzcą w klasie} \\
+    (1 - \phi) p_i + \phi, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+Wybiera się globalnego zwycięzce obliczając odległość $d_i$ i lokalnego zwycięzce, ale z tej klasy
+biorąc pod uwagę $d_i'$. Wagi lokalnego zwycięzcy są modyfikowane w następujący sposób:
+
+\begin{equation}
+ W' = \begin{cases}
+    w + \alpha (x-w),& \text{if neuron jest globalnym i lokalnym zwycięzcą} \\
+    w - \beta (x-w) & \text{otherwise} 
+\end{cases}
+\end{equation}
+
+podczas, gdy globalny zwycięzca jest odrzucany od wektora wejściowego zgodnie ze wzorem:
+
+\begin{equation}
+ w' = w - \gamma (x - w)
+\end{equation}
+jeśli globalny zwycięzca nie jest we właściwej klasie
+
+\paragraph{Wariant LVQ \#2}
+
+Jeśli w sieci jest neuron zwycięzca z wektorem wag $w_1$, który nie wskazuje na klasę sygnału
+wejściowego, a drugi następny w kolejności o wagach $w_2$ właśnie z tej klasy to w takiej wersji
+LVQ zwycięzca jest odpychany od sygnału wejściowego, drugi natomiast jest traktowany jak zwycięzca 
+pod warunkiem, że odległość wektora wejściowego od obu wybranych neuronów jest podobna
+
+\begin{equation}
+ w_1 = w_1 - \alpha (x - w)
+\end{equation}
+
+\begin{equation}
+ w_2 = w_2 - \alpha (x - w)
+\end{equation}
+
+\paragraph{Strategia uczenia sieci LVQ}
+
+Podstawowy proces uczenia sieci LVQ polega na obliczeniu odległości w sensie metryki euklidesowskiej
+pomiędzy wektorami $w_i$ (wektor wagi), a wektorem $x$ (norma średniokwadratowa):
+
+\paragraph{Sieci Counter Propagation}
+
+zaproponowane przez Robarta Hecht-Nielsens, kompilacja sieci Kohonena i Grosberga, szybciej się uczą (w przeciwieństwie
+do sieci ze wsteczną propagacją). Przy pomocy CP można szybko weryfikować hipotezy robocze
+
+\begin{equation}
+ || x || = 1
+\end{equation}
+
+Normalizacja wektorów wejściowych
+\begin{equation}
+ x_i' = \frac{x_i}{ \sqrt{ \sum_{j=1}^n x_j^2 }  }
+\end{equation}
+
+Pierwsza warstwa realizuje algorytm Kohonena:
+
+\begin{equation}
+ e_j = W_j^T X
+\end{equation}
+
+\begin{equation}
+ k_j = \begin{cases}
+    1,& \text{if } \forall_{j \ne i} e_j > e_i \\
+    0,              & \text{otherwise}
+\end{cases}
+\end{equation}
+
+
+\paragraph{Jak działa warstwa druga?}
+
+Realizuje algorytm Outstar Grossberga.
+
+\begin{equation}
+ Y = V K
+\end{equation}
+
+\paragraph{Uczenie pierwszej warstwy}
+
+W danym kroku uczenia korekcie wag podlega tylko zwycięzca
+\begin{equation}
+ \Delta W = \mu_1 (X - W)
+\end{equation}
+Początkowo $w_{ij} = \sqrt{\frac{1}{n}}$, zamiast $x$ podaje się na wejście $x'$:
+
+\begin{equation}
+ {x_i^k} ' = \mu_2(k) x_i^k + (1 - \mu_2(k)) \sqrt{\frac{1}{n}}
+\end{equation}
+
+\paragraph{Uczenie drugiej warstwy}
+
+Według reguły Widrow-Hoffa
+
+\begin{equation}
+ v_{ij}^{k+1} = v_{ij}^k + \mu_3 (z_i - y_i) k_j
+\end{equation}
+
+Podczas uczenia warstwy Grossberga polega na wpisywaniu do tablicy \textit{look up table}
+właściwych wartości, które mają być odpowiednią reakcją na pewną grupę sygnałów pojawiających się
+na wejściu sieci, a którą identyfikuje pewien neuron warstwy Kohonena.
