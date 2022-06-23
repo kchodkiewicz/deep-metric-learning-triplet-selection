@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59b7a738-c94b-481e-a3ea-6059e59b2c70" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/notebooks/cifar100-similarity.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/siamens-random.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dml/.idea/dml.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dml/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dml/main.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/mnist-160k_weights.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/dml.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/dml.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/face-net-random.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/face-net-random.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,10 +41,24 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable"
+    "last_opened_file_path": "S:/studia/uni/praca_magisterska/deep-metric-learning-triplet-selection/code/deep-metric-learning/notebooks/dml.py",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "Errors"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
+    ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="S:\studia\uni\praca_magisterska\deep-metric-learning-triplet-selection\code\deep-metric-learning\data\omniglot" />
+      <recent name="S:\studia\uni\praca_magisterska\deep-metric-learning-triplet-selection\code\deep-metric-learning\notebooks" />
+      <recent name="S:\studia\uni\praca_magisterska\deep-metric-learning-triplet-selection\code\deep-metric-learning\models" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.dml">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="deep-metric-learning" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -74,7 +88,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\kchod\anaconda3\envs\deep-metric-learning39\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -89,6 +103,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="dml" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="deep-metric-learning" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\kchod\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/notebooks" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/notebooks/dml.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.deep-metric-learning" />
+      <item itemvalue="Python.dml" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -109,6 +149,14 @@
       <workItem from="1650913123389" duration="796000" />
       <workItem from="1651000436063" duration="615000" />
       <workItem from="1651086120533" duration="882000" />
+      <workItem from="1651411484956" duration="8802000" />
+      <workItem from="1651584268842" duration="2738000" />
+      <workItem from="1651782978789" duration="202000" />
+      <workItem from="1652602678780" duration="8142000" />
+      <workItem from="1653595288043" duration="620000" />
+      <workItem from="1654715311548" duration="7764000" />
+      <workItem from="1655145982895" duration="751000" />
+      <workItem from="1655378504999" duration="3388000" />
     </task>
     <servers />
   </component>
